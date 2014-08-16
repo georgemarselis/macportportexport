@@ -1,0 +1,108 @@
+#!/opt/local/bin/perl -w
+
+
+# macportportexport: reconstruct a macport command line, so you can reuse
+#	your programs.
+# 		Also, produces puppet templates, chef recepies and ansible solutions
+
+# Copyright 2014 George Marselis <george@marsel.is>
+
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+use Data::Dumper;
+use strict;
+use warnings;
+
+my $portbin = '/opt/local/bin/port';
+
+sub port_readports
+{
+
+	my $action = 'installed';
+	my $type    = 'active';
+	my @args 	= ( $action, $type );
+
+	open( my $porthandle, '-|', $portbin, @args ) or
+		die "Cannot run $portbin: $!";
+
+	return parse( <$porthandle> );
+
+}
+
+sub parse
+{
+
+	my @list = @_;
+	
+	my @commandline;
+	foreach( @list ) {
+
+		/The following/ and next;
+
+		my $tempbuffer = $_; 	# read in, clean up.
+		chomp $tempbuffer;
+		$tempbuffer =~ s/^\s*//;
+		$tempbuffer =~ s/ \(active\)//;
+		$tempbuffer =~ s/@//g;
+
+		my $programname 	= '';
+		my $versionvariants = '';
+
+		( $programname , $versionvariants ) = split ' ', $tempbuffer;
+		$tempbuffer = '';
+		
+		if( $versionvariants =~ /\+\w+/ ) {
+
+			( my $foo , $versionvariants ) = split '\+', $versionvariants, 2;
+			my @options = split '\+', $versionvariants;
+			#print Dumper @options;
+			$tempbuffer = ' +'.join( ' +', @options );
+		}
+
+		push @commandline, $programname.$tempbuffer;
+
+	}
+
+	return @commandline;
+}
+
+sub ansible_solution
+{
+
+}
+
+sub puppet_template
+{
+
+}
+
+sub chef_recepie
+{
+
+}
+
+sub addoptions
+{
+
+}
+
+sub main
+{
+
+	my @output = port_readports( );
+	printf "port install %s\n", join( ' ', @output );
+}
+
+main( );
