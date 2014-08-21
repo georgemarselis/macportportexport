@@ -306,6 +306,8 @@ sub exportto
 {
 	my ( $automationthing , $automationvalue ) = @_;
 
+	print Dumper $automationvalue;
+
 	\$automationvalue;
 }
 
