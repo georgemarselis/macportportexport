@@ -20,37 +20,37 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
+use strict;
+use warnings;
 use Data::Dumper;
 use File::Copy;
 use POSIX qw(strftime);
 use Getopt::Long;
 
-use strict;
-use warnings;
+my $port_bin = '/opt/local/bin/port';
 
-my $portbin = '/opt/local/bin/port';
-
-sub port_readports
+sub get_portpackagesandvariants
 {
 
 	my $action = 'installed';
 	my $type    = 'active';
 	my @args 	= ( $action, $type );
 
-	open( my $porthandle, '-|', $portbin, @args ) or
-		die "Cannot run $portbin: $!";
+	open( my $porthandle, '-|', $port_bin, @args ) or
+		die "Cannot run $port_bin: $!";
 
 	return parse( <$porthandle> );
 
 }
 
+
 sub parse
 {
 
-	my @list = @_;
+	my @list 		= @_;
+	my %portshash 	= ( );
+	my $variants 	= '';
 	
-	my @commandline;
 	foreach( @list ) {
 
 		/The following/ and next;
@@ -61,125 +61,112 @@ sub parse
 		$tempbuffer =~ s/ \(active\)//;
 		$tempbuffer =~ s/@//g;
 
-		my $programname 	= '';
-		my $versionvariants = '';
-
-		( $programname , $versionvariants ) = split ' ', $tempbuffer;
-		$tempbuffer = '';
+		my ( $program_name , $variants_in ) = split ' ', $tempbuffer;
 		
-		if( $versionvariants =~ /\+\w+/ ) {
+		if( $variants_in =~ /\+\w+/ ) {
 
-			( my $foo , $versionvariants ) = split '\+', $versionvariants, 2;
-			my @options = split '\+', $versionvariants;
-			#print Dumper @options;
-			$tempbuffer = ' +'.join( ' +', @options );
+			( my $foo , $variants_in )	= split /\+/, $variants_in, 2;  # get the variants as string
+			my @temparray				= split /\+/, $variants_in;     # resplit them 
+			$variants 					= '+'.join( ' +', @temparray ); # re-join them, adding appropriate spaces		
 		}
 
-		push @commandline, $programname.$tempbuffer;
-
+		$portshash{ $program_name } = $variants;
 	}
 
-	return @commandline;
+	return %portshash;
 }
 
-sub ansible_solution
-{
 
-}
-
-sub writevariantsconffile 
-{
-
-	my @listofvariants 				= @_;
-	my $macportsvariantsconf_file 	= '/opt/local/etc/macports/variants.conf';
-	my $puppetvariantsconf_file 	= './variants.conf';
-	my $writebuffer 				= '';
-
-
-	if( -e $macportsvariantsconf_file ) {
-
-		# write warning to user that file exists and should not overwrite it,
-		# but append to it.
-		$writebuffer = "
+###########
+# dump the list of packages and variants as modules, ready to 
+# 	puppet apply them
 #
-# PLEASE READ: 
-#   Your /opt/local/etc/macports/variants.conf is not empty.
-#
-# 	You should take a look at the contents of the file and consider if you need to 
-#	append to the file or overwrite it.
-#
-";
-}
-	# write the variants in a local file
-	if( -f $puppetvariantsconf_file ) {
-		warn $puppetvariantsconf_file.' exists; Will be backed up to '.$puppetvariantsconf_file.'.bak';
-		move( $puppetvariantsconf_file, $puppetvariantsconf_file.'.bak' ) or 
-			die $puppetvariantsconf_file.'.bak could not be written; exiting';
-			
-
-	}
-
-	open( my $filehandle, ">", $puppetvariantsconf_file ) or 
-		die $puppetvariantsconf_file.' could not be written; exiting';
-
-	print $filehandle $writebuffer;
-	print $filehandle join( ' ', @listofvariants );
-
-	close $filehandle;
-
-	print 'Variants file '.$puppetvariantsconf_file.' written';
-
-
-}
-
-# this should write a puppet manifest or a facter extension
-sub write_detectos_manifest {
-
-	my $osversion 		= exec( "facter macosx_productversion_major" );
-	my %osnicknamelist  = 	{ 	
-								'10.5' => 'Leopard',
-								'10.6' => 'Snow Leopard',
-								'10.7' => 'Lion',
-								'10.8' => 'Mountain Lion',
-								'10.9' => 'Mavericks'
-							};
-
-	return $osnicknamelist{ $osversion } ;
-}
-
-
-sub writemacports_manifest 
+sub puppet_template
 {
+	my $root_dir		= 'puppet';
 
-	my @listofvariants = @_;
+	my %portshash 		 = get_portpackagesandvariants( );
+	my @listofpackages 	 = keys %portshash;
+	my $stringofvariants = get_stringofvariants( %portshash );
 
-	my $root 			= './puppet';
-	my $modules_dir 	= $root.'/modules';
-	my $puppetvariantsconf_file = './variants.conf';
-
-	my $writebuffer 	= '';
-	my $osnickname 		= write_detectos_manifest( );
-
-
+	create_root_directory( $root_dir );
+	write_root_manifest( $root_dir, @listofpackages );
+	create_module_hierarchy( $root_dir, @listofpackages );
+	write_module_manistests( $root_dir, @listofpackages );
+	write_macports_manifest( $root_dir );
+	write_variants_conffile( $stringofvariants );
 	
+	print "\nYour puppet files are ready. Please type\n\tsudo puppet apply --verbose ./$root_dir/start.pp\n\n".
+			" to apply your puppet manifestos.\n";
+
+}
+
+
+sub get_stringofvariants 
+{
+	my %portshash 		= @_;
+	my @packages 		= keys %portshash;
+	my %variantshash  	= ( );
+	my $stringofvariants = '';
+	
+	foreach my $package ( @packages ) {
+
+		if( $portshash{ $package } =~ /\+/ ) {
+
+			my @variants = split /\+/, $portshash{ $package };
+
+			foreach my $variant ( @variants ) {
+				chomp $variant;
+				$variant =~ s/\s*$//;
+				if( $variant ne '' and ! exists $variantshash{ $variant } ) {
+					$variantshash{ $variant } = 1;
+				}
+			}
+		}
+	}
+
+	foreach( keys %variantshash ) {
+		if( $variantshash{ $_ } ne '' ) {
+			$stringofvariants .= ' +'.$_ ;
+		}
+	}
+
+	return $stringofvariants
+}
+
+sub create_root_directory
+{
+	my $root_dir = $_[0];
+
+	if( ! -d $root_dir ) {
+		mkdir $root_dir or
+			die $0." cannot create root puppet dir $root_dir: $!";
+	}
+}
+
+sub write_macports_manifest 
+{
+
+	my $root 			= $_[0];
+	my $modules_dir 	= $root.'/modules';
 	my $macports_module 			= $modules_dir.'/macports';
 	my $macports_module_manifestdir = $macports_module.'/manifests';
 	my $macports_manifest 			= $macports_module_manifestdir.'/init.pp';
 	my $macports_module_filesdir	= $macports_module.'/files';
+	my $writebuffer 	= '';
 
 
 	( ! -d $macports_module 			) and mkdir $macports_module; 
 	( ! -d $macports_module_manifestdir ) and mkdir $macports_module_manifestdir;
 	( ! -d $macports_module_filesdir 	) and mkdir $macports_module_filesdir;
 
-	writevariantsconffile( @listofvariants );
-	move( $puppetvariantsconf_file, $macports_module_filesdir );
+
 
 	$writebuffer  = "
 class macports {
 
 
-	$osnickname = \$macosx_productversion_major ? {
+	\$osnickname = \$macosx_productversion_major ? {
 		'10.5' => 'Leopard',
 		'10.6' => 'Snow Leopard',
 		'10.7' => 'Lion',
@@ -187,18 +174,18 @@ class macports {
 		'10.9' => 'Mavericks',
 	}
 
-	file { [ /var/db/.puppet_pkgdmg_installed_$osnickname ]
+	file { [ /var/db/.puppet_pkgdmg_installed_\$osnickname ]
 		ensure 	=> absent,
 		recurse => true,
 		force 	=> yes,
 		
 	}
-]
+
 	package { [ macports ] :
 		provider 	=> pkgdmg
-		source 		=> 'https://distfiles.macports.org/MacPorts/MacPorts-current-$osnickname.pkg'
+		source 		=> 'https://distfiles.macports.org/MacPorts/MacPorts-current-\$osnickname.pkg'
 		ensure 		=> present,
-		subscribe   => File[ /var/db/.puppet_pkgdmg_installed_$osnickname ],
+		subscribe   => File[ /var/db/.puppet_pkgdmg_installed_\$osnickname ],
 
 	}
 
@@ -225,102 +212,195 @@ class macports {
 ";
 
 	open my $filehandle, '>', $macports_manifest or die "$0: Cannot overwrite $macports_manifest : $!";
-	print $filehandle $writebuffer;
+
+	printf $filehandle $writebuffer;
 	close $filehandle;
 
 }
 
-###########
-# dump the list of packages and variants as modules, ready to 
-# 	puppet apply them
-#
-sub puppet_template
-{
-	my @listofpackages 	= ( );
-	my @listofvariants 	= ( );
-	my $root_dir		= './puppet';
-	my $modules_dir 	= $root_dir.'/modules';
-	my $defaults_dir 	= $modules_dir.'/defaults';
+
+sub write_root_manifest 
+{ 
+
+	my ( $root_dir, @listofpackages ) = @_;
 	my $writebuffer 	= '';
 
-	( ! -d $root_dir 	) and mkdir $root_dir 		or die "$0: could not make $root_dir: $!";
+	my $datestring = strftime "%Y-%m-%d_%T", localtime;
+	$writebuffer = "
+########################################################################
+#
+# Autogenerated by $0 on $datestring
+#
+
+";
+	@listofpackages = sort @listofpackages;
+	foreach my $package ( @listofpackages )	{
+		$package =~ s/\./-/g;
+		$writebuffer .= sprintf( "include $package\n" );
+	}
+
+	open my $filehandle, '>', $root_dir.'/start.pp';
+	printf $filehandle $writebuffer;
+
+	close $filehandle;
+
+}
+
+
+sub create_module_hierarchy 
+{
+	my ( $root_dir, @listofpackages ) 	= @_;
+	my $modules_dir 					= $root_dir.'/modules';
+	
 	( ! -d $modules_dir ) and mkdir $modules_dir 	or die "$0: could not make $modules_dir: $!";
 
 	foreach( @listofpackages ) {
-		
+			
 		my $puppetmodule_dir 		= $modules_dir.'/'.$_;
 		my $puppetmanifest_dir 		= $puppetmodule_dir.'/manifests';
-		my $puppetmanifest_file  	= $puppetmanifest_dir.'/init.pp';
+	
+		if( ! -d $puppetmodule_dir ) {
+			mkdir $puppetmodule_dir or 
+				die "$0: could not create directory $puppetmodule_dir : $!";
+		}
 
 		if( ! -d $puppetmanifest_dir ) {
 			mkdir $puppetmanifest_dir or 
 				die "$0: could not create directory $puppetmanifest_dir : $!";
 		}
+	}
+}
 
-		open my $filehandle, '>', $puppetmanifest_file or die "$0: could not open $puppetmanifest_file : $!";
 
-		$writebuffer  = "
-class $_ {
+sub write_module_manistests
+{
+	my ( $root_dir, @listofpackages ) 	= @_;
+	my $modules_dir 					= $root_dir.'/modules';
 
-	package { [ $_ ] :
+	foreach my $package ( @listofpackages ) {
+		
+		my $puppet_module_dir 			= $modules_dir.'/'.$package;
+		my $puppet_module_manifest_dir 	= $puppet_module_dir.'/manifests';
+		my $puppet_module_manifest_file = $puppet_module_manifest_dir.'/init.pp';
+
+		( ! -d $puppet_module_manifest_dir ) and die ": $puppet_module_manifest_dir does not exist";
+		open my $filehandle, '>', $puppet_module_manifest_file or die ": could not open $puppet_module_manifest_file : $!";
+
+		$package =~ s/\./-/g;
+		my $writebuffer  = "
+class $package {
+
+	package { [ \"$package\" ] :
 		provider 	=> 'macports',
 		ensure 		=> present,
 
 	}
-
 }
 ";
-		print $filehandle $writebuffer or die "$0: cannot print to file $puppetmanifest_file : $!";
+		printf $filehandle $writebuffer or die "$0: cannot print to file $puppet_module_manifest_file : $!";
 		close $filehandle;
 	}
 
-	#my $datestring = strftime "%Y-%m-%d_%T", localtime;
-	$writebuffer = "
-########################################################################
-#
-# Autogenerated by $0 on FIXME
-#
-";#, $datestring );
-	
-	open my $filehandle, '>', $root_dir.'/macports.pp';
-	print $filehandle $writebuffer;
+}
 
-	foreach( @listofpackages )	{
-		print $filehandle "include $_";
+sub write_variants_conffile 
+{
+
+	my @listofvariants 				= @_;
+	my $macportsvariantsconf_file 	= '/opt/local/etc/macports/variants.conf';
+	my $puppetvariantsconf_file 	= './variants.conf';
+	my $writebuffer 				= '';
+
+
+	if( -e $macportsvariantsconf_file ) {
+
+		# write warning to user that file exists and should not overwrite it,
+		# but append to it.
+		$writebuffer = "#
+# PLEASE READ: 
+#   Your / opt/local/etc/macports/variants.conf is not empty.
+#
+# 	You should take a look at the contents of the file and consider if you need to 
+#	append to the file or overwrite it.
+#
+";
 	}
+
+	# write the variants in a local file
+	if( -f $puppetvariantsconf_file ) {
+		warn $puppetvariantsconf_file.' exists; Will be backed up to '.$puppetvariantsconf_file.'.bak';
+		move( $puppetvariantsconf_file, $puppetvariantsconf_file.'.bak' ) or 
+			die $puppetvariantsconf_file.'.bak could not be written; exiting';
+			
+
+	}
+
+	open( my $filehandle, ">", $puppetvariantsconf_file ) or 
+		die $puppetvariantsconf_file.' could not be written; exiting';
+
+	printf $filehandle $writebuffer;
+	printf $filehandle "%s\n", join( ' ', @listofvariants ) ;
+
 	close $filehandle;
 
-	writemacports_manifest( );
+	print 'Variants file '.$puppetvariantsconf_file.' written';
 
-
-	print "\nYour puppet files are ready. Please type\n\tsudo puppet apply ./$root_dir/macports.pp\n\n to apply your puppet manifestos.\n";
 
 }
 
-sub chef_recepie
+
+sub chef_recipe
 {
 
 }
 
-sub exportto
+sub ansible_module 
 {
-	my ( $automationthing , $automationvalue ) = @_;
 
-	print Dumper $automationvalue;
+}
 
-	\$automationvalue;
+sub cfengine 
+{
+
+}
+
+sub dispatch
+{
+	my ( $automationthing , $action ) = @_;
+
+	my $dispatch_table  = { 
+			puppet 		=> \&puppet_template,
+			chef   		=> \&chef_recipe,
+			ansible 	=> \&ansible_module,
+			cfengine 	=> \&cfegine,
+			cli 		=> \&get_portpackagesandvariants,
+			_DEFAULT_ 	=> \&help
+	};
+
+	exists $dispatch_table->{ $action } or 
+		die "$action is unknown. If this is a bug, report it.";
+
+	if( $action ) {
+		$dispatch_table->{ $action }->();
+	}
+
+	exit 0;
+}
+
+sub help {
+
+	print "this is the help\n";
+
+	exit 0;
 }
 
 sub main
 {
 
-	my $exportto = '';
-	my $filename = '';
+	GetOptions( 'export:s' => \&dispatch, 'filename:s' => \&filename, 'help' => \&help );
 
-	GetOptions( 'exportto:s' => \$exportto, 'filename:s' => \$filename );
+	exit 0;
 
-	my @output = port_readports( );
-	printf "port install %s\n", join( ' ', @output );
 }
 
 main( );
