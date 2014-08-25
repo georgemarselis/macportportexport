@@ -94,7 +94,7 @@ sub puppet_template
 	create_module_hierarchy( $root_dir, @listofpackages );
 	write_module_manistests( $root_dir, @listofpackages );
 	write_macports_manifest( $root_dir );
-	write_variants_conffile( $stringofvariants );
+	write_variants_conffile( $root_dir, $stringofvariants );
 	
 	print "\nYour puppet files are ready. Please type\n\tsudo puppet apply --verbose ./$root_dir/start.pp\n\n".
 			" to apply your puppet manifestos.\n";
@@ -200,7 +200,7 @@ class macports {
 	}
 
 	file { [/opt/local/etc/macports/variants.conf] 
-		source 		=> file://./modules/macports/variants.conf,
+		source 		=> file://./puppet/macports/variants.conf,
 		ensure 		=> present,
 		mode 		=> 644,
 		owner 		=> root,
@@ -306,10 +306,11 @@ class $package {
 sub write_variants_conffile 
 {
 
-	my @listofvariants 				= @_;
-	my $macportsvariantsconf_file 	= '/opt/local/etc/macports/variants.conf';
-	my $puppetvariantsconf_file 	= './variants.conf';
-	my $writebuffer 				= '';
+	my ( $root_dir, $stringofvariants )	= @_;
+	my $macportsvariantsconf_file 		= '/opt/local/etc/macports/variants.conf';
+	my $macports_module_files_dir	 	= $root_dir.'/modules/macports/files';
+	my $macports_module_variants_file   = $macports_module_files_dir.'/variants.conf';
+	my $writebuffer 					= '';
 
 
 	if( -e $macportsvariantsconf_file ) {
@@ -326,26 +327,15 @@ sub write_variants_conffile
 ";
 	}
 
-	# write the variants in a local file
-	if( -f $puppetvariantsconf_file ) {
-		warn $puppetvariantsconf_file.' exists; Will be backed up to '.$puppetvariantsconf_file.'.bak';
-		move( $puppetvariantsconf_file, $puppetvariantsconf_file.'.bak' ) or 
-			die $puppetvariantsconf_file.'.bak could not be written; exiting';
-			
+	$stringofvariants =~ s/^\s*//;
 
-	}
+	$writebuffer .= sprintf( "%s\n", $stringofvariants );
 
-	open( my $filehandle, ">", $puppetvariantsconf_file ) or 
-		die $puppetvariantsconf_file.' could not be written; exiting';
-
+	( ! -d $macports_module_files_dir ) and die "$macports_module_files_dir does not exist";
+	open( my $filehandle, ">", $macports_module_variants_file ) or 
+		die $macports_module_variants_file.' could not be written; exiting';
 	printf $filehandle $writebuffer;
-	printf $filehandle "%s\n", join( ' ', @listofvariants ) ;
-
 	close $filehandle;
-
-	print 'Variants file '.$puppetvariantsconf_file.' written';
-
-
 }
 
 
