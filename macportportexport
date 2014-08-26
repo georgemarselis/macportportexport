@@ -96,7 +96,7 @@ sub puppet_template
 	write_macports_manifest( $root_dir );
 	write_variants_conffile( $root_dir, $stringofvariants );
 	
-	print "\nYour puppet files are ready. Please type\n\tsudo puppet apply --verbose ./$root_dir/start.pp\n\n".
+	print "\nYour puppet files are ready. Please type\n\tsudo puppet apply --verbose ./$root_dir/manifests/site.pp --modulepath=puppet/modules\n\n".
 			" to apply your puppet manifestos.\n";
 
 }
