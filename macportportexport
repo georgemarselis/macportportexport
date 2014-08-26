@@ -1,4 +1,4 @@
-#!/opt/local/bin/perl -w
+#!/opt/local/bin/perl -wT
 
 
 # macportportexport: reconstruct a macport command line, so you can reuse
@@ -26,8 +26,13 @@ use Data::Dumper;
 use File::Copy;
 use POSIX qw(strftime);
 use Getopt::Long;
+use Sys::Hostname;
 
 my $port_bin = '/opt/local/bin/port';
+
+# Set PATH and remove some environment variables for running in taint mode.
+$ENV{ 'PATH' } = '';
+delete @ENV{ 'IFS', 'CDPATH', 'ENV', 'BASH_ENV' };
 
 sub get_portpackagesandvariants
 {
