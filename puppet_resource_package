@@ -1,0 +1,1819 @@
+[0;33mwarning: Package sqlite3 found in both gem and macports; skipping the macports version[0m
+package { 'BSD':
+  ensure => 'installed',
+}
+package { 'CFPropertyList':
+  ensure => '2.2.0',
+}
+package { 'GraphicsMagick':
+  ensure => '1.3.19',
+}
+package { 'Xft2':
+  ensure => '2.3.2',
+}
+package { 'XviD':
+  ensure => '1.3.3',
+}
+package { 'ansible':
+  ensure => '1.7',
+}
+package { 'apache-ant':
+  ensure => '1.9.3',
+}
+package { 'apr':
+  ensure => '1.5.1',
+}
+package { 'apr-util':
+  ensure => '1.5.3',
+}
+package { 'apr_memcache':
+  ensure => '0.7.0',
+}
+package { 'aspell':
+  ensure => '0.60.6.1',
+}
+package { 'at-spi2-atk':
+  ensure => '2.12.1',
+}
+package { 'at-spi2-core':
+  ensure => '2.12.0',
+}
+package { 'atk':
+  ensure => '2.12.0',
+}
+package { 'audiofile':
+  ensure => '0.3.6',
+}
+package { 'augeas':
+  ensure => '1.1.0',
+}
+package { 'autobook':
+  ensure => '1.5',
+}
+package { 'autoconf':
+  ensure => '2.69',
+}
+package { 'automake':
+  ensure => '1.14.1',
+}
+package { 'automake17':
+  ensure => '1.7.9',
+}
+package { 'avahi':
+  ensure => '0.6.31',
+}
+package { 'bash':
+  ensure => '4.3.18',
+}
+package { 'bash-completion-devel':
+  ensure => '2.1',
+}
+package { 'beecrypt':
+  ensure => '4.2.1',
+}
+package { 'bigdecimal':
+  ensure => '1.2.0',
+}
+package { 'bison':
+  ensure => '2.7.1',
+}
+package { 'bmake':
+  ensure => '20140620',
+}
+package { 'boehmgc':
+  ensure => '7.4.2',
+}
+package { 'boost':
+  ensure => '1.56.0_1+no_single+no',
+}
+package { 'bsdmake':
+  ensure => '24',
+}
+package { 'bzip2':
+  ensure => '1.0.6',
+}
+package { 'cairo':
+  ensure => '1.12.16',
+}
+package { 'cctools':
+  ensure => '855',
+}
+package { 'cctools-headers':
+  ensure => '855',
+}
+package { 'clang_select':
+  ensure => '1.0',
+}
+package { 'cloog':
+  ensure => '0.18.2',
+}
+package { 'cmake':
+  ensure => '3.0.0',
+}
+package { 'coreutils':
+  ensure => '8.22',
+}
+package { 'cppunit':
+  ensure => '1.12.1',
+}
+package { 'curl':
+  ensure => '7.37.1',
+}
+package { 'curl-ca-bundle':
+  ensure => '7.37.1',
+}
+package { 'cyrus-sasl2':
+  ensure => '2.1.26',
+}
+package { 'db46':
+  ensure => '4.6.21',
+}
+package { 'db47':
+  ensure => '4.7.25',
+}
+package { 'db_select':
+  ensure => '0.1',
+}
+package { 'dbus':
+  ensure => '1.8.6',
+}
+package { 'dbus-glib':
+  ensure => '0.102',
+}
+package { 'dbus-python27':
+  ensure => '1.2.0',
+}
+package { 'desktop-file-utils':
+  ensure => '0.22',
+}
+package { 'dirac':
+  ensure => '1.0.2',
+}
+package { 'docbook-xml':
+  ensure => '5.0',
+}
+package { 'docbook-xml-4.1.2':
+  ensure => '5.0',
+}
+package { 'docbook-xml-4.2':
+  ensure => '5.0',
+}
+package { 'docbook-xml-4.3':
+  ensure => '5.0',
+}
+package { 'docbook-xml-4.4':
+  ensure => '5.0',
+}
+package { 'docbook-xml-4.5':
+  ensure => '5.0',
+}
+package { 'docbook-xml-5.0':
+  ensure => '5.0',
+}
+package { 'docbook-xsl':
+  ensure => '1.78.1',
+}
+package { 'dos2unix':
+  ensure => '6.0.3',
+}
+package { 'doxygen':
+  ensure => '1.8.7',
+}
+package { 'dpkg':
+  ensure => '1.14.29',
+}
+package { 'dyld-headers':
+  ensure => '239.3',
+}
+package { 'e':
+  ensure => '0.02718',
+}
+package { 'enca':
+  ensure => '1.15',
+}
+package { 'enchant':
+  ensure => '1.6.0',
+}
+package { 'erlang':
+  ensure => '17.1',
+}
+package { 'esound':
+  ensure => '0.2.41',
+}
+package { 'exiv2':
+  ensure => '0.24',
+}
+package { 'expat':
+  ensure => '2.1.0',
+}
+package { 'faac':
+  ensure => '1.28',
+}
+package { 'faad2':
+  ensure => '2.7',
+}
+package { 'facter':
+  ensure => '1.6.2',
+}
+package { 'ffmpeg':
+  ensure => '2.3.2',
+}
+package { 'fftw-3':
+  ensure => '3.3.4',
+}
+package { 'fftw-3-single':
+  ensure => '3.3.4',
+}
+package { 'file':
+  ensure => '5.19',
+}
+package { 'findutils':
+  ensure => '4.4.2',
+}
+package { 'flac':
+  ensure => '1.3.0',
+}
+package { 'flex':
+  ensure => '2.5.37',
+}
+package { 'fontconfig':
+  ensure => '2.11.1',
+}
+package { 'fop':
+  ensure => '1.1',
+}
+package { 'fping':
+  ensure => '3.10',
+}
+package { 'freetype':
+  ensure => '2.5.3',
+}
+package { 'fribidi':
+  ensure => '0.19.6',
+}
+package { 'ganglia':
+  ensure => '3.1.7',
+}
+package { 'gawk':
+  ensure => '4.1.1',
+}
+package { 'gcc44':
+  ensure => '4.4.7',
+}
+package { 'gcc45':
+  ensure => '4.5.4',
+}
+package { 'gcc46':
+  ensure => '4.6.4',
+}
+package { 'gcc47':
+  ensure => '4.7.3',
+}
+package { 'gcc48':
+  ensure => '4.8.3',
+}
+package { 'gcc_select':
+  ensure => '0.1',
+}
+package { 'gccmakedep':
+  ensure => '1.0.2',
+}
+package { 'gdbm':
+  ensure => '1.11',
+}
+package { 'gdk-pixbuf2':
+  ensure => '2.30.8',
+}
+package { 'getopt':
+  ensure => '1.1.5',
+}
+package { 'gettext':
+  ensure => '0.19.2',
+}
+package { 'ghc':
+  ensure => '7.6.3',
+}
+package { 'ghc-bootstrap':
+  ensure => '7.0.4',
+}
+package { 'git':
+  ensure => '2.0.4_0+bash_completion+credential_osxkeychain+doc+pcre+perl5',
+}
+package { 'git-extras':
+  ensure => '1.9.0',
+}
+package { 'git-flow':
+  ensure => '0.4.1',
+}
+package { 'glib1':
+  ensure => '1.2.10',
+}
+package { 'glib2':
+  ensure => '2.40.0',
+}
+package { 'glibmm':
+  ensure => '2.40.0',
+}
+package { 'glpk':
+  ensure => '4.48',
+}
+package { 'gmake':
+  ensure => '4.0',
+}
+package { 'gmp':
+  ensure => '6.0.0',
+}
+package { 'gmsl':
+  ensure => '1.0.0',
+}
+package { 'gnome-common':
+  ensure => '3.12.0',
+}
+package { 'gnome-mime-data':
+  ensure => '2.18.0',
+}
+package { 'gnugo':
+  ensure => '3.8',
+}
+package { 'gnutar':
+  ensure => '1.27.1',
+}
+package { 'gnutls':
+  ensure => '3.3.6',
+}
+package { 'gobject-introspection':
+  ensure => '1.40.0',
+}
+package { 'gperf':
+  ensure => '3.0.4',
+}
+package { 'graphite2':
+  ensure => '1.2.4',
+}
+package { 'grok':
+  ensure => '1.20110708.1',
+}
+package { 'gsed':
+  ensure => '4.2.2',
+}
+package { 'gsl':
+  ensure => '1.16',
+}
+package { 'gtk1':
+  ensure => '1.2.10',
+}
+package { 'gtk2':
+  ensure => '2.24.24',
+}
+package { 'gtk3':
+  ensure => '3.12.2',
+}
+package { 'harfbuzz':
+  ensure => '0.9.34',
+}
+package { 'hdf5':
+  ensure => '1.8.13',
+}
+package { 'help2man':
+  ensure => '1.46.1',
+}
+package { 'hicolor-icon-theme':
+  ensure => '0.13',
+}
+package { 'hunspell':
+  ensure => '1.3.3',
+}
+package { 'hwloc':
+  ensure => '1.8.1',
+}
+package { 'icu':
+  ensure => '53.1',
+}
+package { 'ilmbase':
+  ensure => '1.0.2',
+}
+package { 'imake':
+  ensure => '1.0.5',
+}
+package { 'indent':
+  ensure => '2.2.10',
+}
+package { 'intltool':
+  ensure => '0.50.2_3+perl5',
+}
+package { 'io-console':
+  ensure => '0.4.2',
+}
+package { 'isl':
+  ensure => '0.13',
+}
+package { 'iso-codes':
+  ensure => '3.43',
+}
+package { 'jack':
+  ensure => '0.121.3',
+}
+package { 'jam':
+  ensure => '2.5',
+}
+package { 'jasper':
+  ensure => '1.900.1',
+}
+package { 'java_memcached':
+  ensure => '2.0.1_0+built_in',
+}
+package { 'jbig2dec':
+  ensure => '0.11',
+}
+package { 'jbigkit':
+  ensure => '2.1',
+}
+package { 'jpeg':
+  ensure => '9a',
+}
+package { 'json':
+  ensure => '1.7.7',
+}
+package { 'json-c':
+  ensure => '0.12-20140410',
+}
+package { 'kerberos5':
+  ensure => '1.11.3',
+}
+package { 'lame':
+  ensure => '3.99.5',
+}
+package { 'lcms':
+  ensure => '1.19',
+}
+package { 'lcms2':
+  ensure => '2.6',
+}
+package { 'ld64':
+  ensure => '236.3',
+}
+package { 'lensfun':
+  ensure => '0.2.8',
+}
+package { 'libao':
+  ensure => '1.1.0',
+}
+package { 'libarchive':
+  ensure => '3.1.2',
+}
+package { 'libass':
+  ensure => '0.10.2',
+}
+package { 'libassuan':
+  ensure => '2.1.1',
+}
+package { 'libbluray':
+  ensure => '0.6.0',
+}
+package { 'libcomerr':
+  ensure => '1.42.9',
+}
+package { 'libconfuse':
+  ensure => '2.7',
+}
+package { 'libcroco':
+  ensure => '0.6.8',
+}
+package { 'libdaemon':
+  ensure => '0.14',
+}
+package { 'libdbi':
+  ensure => '0.8.4',
+}
+package { 'libdiscid':
+  ensure => '0.6.1',
+}
+package { 'libedit':
+  ensure => '20121213-3.0',
+}
+package { 'libesmtp':
+  ensure => '1.0.6',
+}
+package { 'libevent':
+  ensure => '2.0.21',
+}
+package { 'libexif':
+  ensure => '0.6.21',
+}
+package { 'libfdk-aac':
+  ensure => '0.1.3',
+}
+package { 'libffi':
+  ensure => '3.1',
+}
+package { 'libgcc':
+  ensure => '4.9.1',
+}
+package { 'libgcc45':
+  ensure => '4.5.4',
+}
+package { 'libgcrypt':
+  ensure => '1.6.1',
+}
+package { 'libglade2':
+  ensure => '2.6.4',
+}
+package { 'libgnome-keyring':
+  ensure => '3.12.0',
+}
+package { 'libgpg-error':
+  ensure => '1.13',
+}
+package { 'libharu':
+  ensure => '2.2.1',
+}
+package { 'libiconv':
+  ensure => '1.14',
+}
+package { 'libidl':
+  ensure => '0.8.14',
+}
+package { 'libidn':
+  ensure => '1.26',
+}
+package { 'libmad':
+  ensure => '0.15.1b',
+}
+package { 'libmagic':
+  ensure => '5.19',
+}
+package { 'libmemcache':
+  ensure => '1.4.0.rc2',
+}
+package { 'libmemcached':
+  ensure => '1.0.10',
+}
+package { 'libmikmod':
+  ensure => '3.2.0',
+}
+package { 'libmms':
+  ensure => '0.6.2',
+}
+package { 'libmng':
+  ensure => '1.0.10',
+}
+package { 'libmodplug':
+  ensure => '0.8.8.5',
+}
+package { 'libmpc':
+  ensure => '1.0.2',
+}
+package { 'libmpcdec':
+  ensure => '1.2.6',
+}
+package { 'libogg':
+  ensure => '1.3.2',
+}
+package { 'liboping-devel':
+  ensure => '20131206',
+}
+package { 'libopus':
+  ensure => '1.1',
+}
+package { 'libpaper':
+  ensure => '1.1.24',
+}
+package { 'libpcap':
+  ensure => '1.5.3',
+}
+package { 'libpixman':
+  ensure => '0.32.6',
+}
+package { 'libpng':
+  ensure => '1.6.12',
+}
+package { 'libproxy':
+  ensure => '0.4.11',
+}
+package { 'libsamplerate':
+  ensure => '0.1.8',
+}
+package { 'libsdl':
+  ensure => '1.2.15',
+}
+package { 'libsigcxx2':
+  ensure => '2.2.11',
+}
+package { 'libsndfile':
+  ensure => '1.0.25',
+}
+package { 'libspiro':
+  ensure => '20071029',
+}
+package { 'libssh2':
+  ensure => '1.4.3',
+}
+package { 'libtasn1':
+  ensure => '3.4',
+}
+package { 'libtheora':
+  ensure => '1.1.1',
+}
+package { 'libtool':
+  ensure => '2.4.2',
+}
+package { 'libunwind-headers':
+  ensure => '35.1',
+}
+package { 'libusb':
+  ensure => '1.0.18',
+}
+package { 'libusb-compat':
+  ensure => '0.1.5',
+}
+package { 'libvorbis':
+  ensure => '1.3.4',
+}
+package { 'libvpx':
+  ensure => '1.3.0',
+}
+package { 'libwmf':
+  ensure => '0.2.8.4',
+}
+package { 'libxml-ruby':
+  ensure => '2.6.0',
+}
+package { 'libxml2':
+  ensure => '2.9.1',
+}
+package { 'libxslt':
+  ensure => '1.1.28',
+}
+package { 'libyaml':
+  ensure => '0.1.6',
+}
+package { 'libzzip':
+  ensure => '0.13.62',
+}
+package { 'llvm-3.3':
+  ensure => '3.3',
+}
+package { 'llvm-3.4':
+  ensure => '3.4.2',
+}
+package { 'llvm-gcc42':
+  ensure => '2336.11',
+}
+package { 'llvm_select':
+  ensure => '1.0',
+}
+package { 'log4c':
+  ensure => '1.2.4',
+}
+package { 'lua':
+  ensure => '5.2.3',
+}
+package { 'lua-cgilua':
+  ensure => '5.1.4',
+}
+package { 'lua-lpeg':
+  ensure => '0.11',
+}
+package { 'lua-luafilesystem':
+  ensure => '1.5.0',
+}
+package { 'lua-luasec':
+  ensure => '0.4',
+}
+package { 'lua-lunit':
+  ensure => '0.3',
+}
+package { 'lynx':
+  ensure => '2.8.7rel.2',
+}
+package { 'lzo2':
+  ensure => '2.06',
+}
+package { 'm4':
+  ensure => '1.4.16',
+}
+package { 'makedepend':
+  ensure => '1.0.4',
+}
+package { 'memcached':
+  ensure => '1.4.17',
+}
+package { 'memcachedb':
+  ensure => '1.2.0',
+}
+package { 'minitest':
+  ensure => '4.3.2',
+}
+package { 'mm-common':
+  ensure => '0.9.6',
+}
+package { 'mpfr':
+  ensure => '3.1.1-p2',
+}
+package { 'mpg123':
+  ensure => '1.17.0',
+}
+package { 'mpi-doc':
+  ensure => '3.1.2',
+}
+package { 'mpi_select':
+  ensure => '0.0',
+}
+package { 'mysql5':
+  ensure => '5.1.72',
+}
+package { 'naturaldocs':
+  ensure => '1.5',
+}
+package { 'ncftp':
+  ensure => '3.2.5',
+}
+package { 'ncurses':
+  ensure => '5.9',
+}
+package { 'ncursesw':
+  ensure => '5.8',
+}
+package { 'neon':
+  ensure => '0.30.0',
+}
+package { 'nettle':
+  ensure => '2.7.1',
+}
+package { 'nmap':
+  ensure => '6.40',
+}
+package { 'nokogiri':
+  ensure => '1.5.6',
+}
+package { 'nosetests_select':
+  ensure => '0.1',
+}
+package { 'ocaml':
+  ensure => '4.01.0',
+}
+package { 'ocaml-findlib':
+  ensure => '1.4.1',
+}
+package { 'opencore-amr':
+  ensure => '0.1.3',
+}
+package { 'openexr':
+  ensure => '1.7.0',
+}
+package { 'openjade':
+  ensure => '1.3.2',
+}
+package { 'openjpeg':
+  ensure => '2.1.0',
+}
+package { 'openjpeg15':
+  ensure => '1.5.0',
+}
+package { 'openldap':
+  ensure => '2.4.39',
+}
+package { 'openmpi-devel-gcc44':
+  ensure => '1.9a1',
+}
+package { 'openmpi-devel-gcc45':
+  ensure => '1.9a1',
+}
+package { 'openmpi-devel-gcc46':
+  ensure => '1.9a1',
+}
+package { 'openmpi-devel-gcc47':
+  ensure => '1.9a1',
+}
+package { 'openmpi-devel-gcc48':
+  ensure => '1.9a1',
+}
+package { 'opensp':
+  ensure => '1.5.2',
+}
+package { 'openssl':
+  ensure => '1.0.1i',
+}
+package { 'orc':
+  ensure => '0.4.18',
+}
+package { 'ossp-uuid':
+  ensure => '1.6.2_3+perl5',
+}
+package { 'p11-kit':
+  ensure => '0.20.3',
+}
+package { 'p5-cache-memcached':
+  ensure => '1.290.0',
+}
+package { 'p5-datetime-format-strptime':
+  ensure => '1.500.0',
+}
+package { 'p5.12-algorithm-diff':
+  ensure => '1.190.200',
+}
+package { 'p5.12-attribute-handlers':
+  ensure => '0.960.0',
+}
+package { 'p5.12-authen-sasl':
+  ensure => '2.140.0',
+}
+package { 'p5.12-cache-memcached':
+  ensure => '1.290.0',
+}
+package { 'p5.12-class-load':
+  ensure => '0.210.0',
+}
+package { 'p5.12-class-singleton':
+  ensure => '1.400.0',
+}
+package { 'p5.12-convert-asn1':
+  ensure => '0.220.0',
+}
+package { 'p5.12-cpan-meta':
+  ensure => '2.142.60',
+}
+package { 'p5.12-cpan-meta-requirements':
+  ensure => '2.126.0',
+}
+package { 'p5.12-cpan-meta-yaml':
+  ensure => '0.12.0',
+}
+package { 'p5.12-data-optlist':
+  ensure => '0.109.0',
+}
+package { 'p5.12-datetime':
+  ensure => '1.100.0',
+}
+package { 'p5.12-datetime-format-strptime':
+  ensure => '1.500.0',
+}
+package { 'p5.12-datetime-locale':
+  ensure => '0.450.0',
+}
+package { 'p5.12-datetime-timezone':
+  ensure => '1.730.0',
+}
+package { 'p5.12-digest-hmac':
+  ensure => '1.30.0',
+}
+package { 'p5.12-digest-md5':
+  ensure => '2.530.0',
+}
+package { 'p5.12-digest-sha1':
+  ensure => '2.130.0',
+}
+package { 'p5.12-dist-checkconflicts':
+  ensure => '0.110.0',
+}
+package { 'p5.12-encode-locale':
+  ensure => '1.30.0',
+}
+package { 'p5.12-error':
+  ensure => '0.170.220',
+}
+package { 'p5.12-extutils-cbuilder':
+  ensure => '0.280.216',
+}
+package { 'p5.12-file-listing':
+  ensure => '6.40.0',
+}
+package { 'p5.12-getopt-long':
+  ensure => '2.420.0',
+}
+package { 'p5.12-gssapi':
+  ensure => '0.280.0',
+}
+package { 'p5.12-html-form':
+  ensure => '6.30.0',
+}
+package { 'p5.12-html-parser':
+  ensure => '3.710.0',
+}
+package { 'p5.12-html-tagset':
+  ensure => '3.200.0',
+}
+package { 'p5.12-http-cookies':
+  ensure => '6.10.0',
+}
+package { 'p5.12-http-daemon':
+  ensure => '6.10.0',
+}
+package { 'p5.12-http-date':
+  ensure => '6.20.0',
+}
+package { 'p5.12-http-message':
+  ensure => '6.60.0',
+}
+package { 'p5.12-http-negotiate':
+  ensure => '6.10.0',
+}
+package { 'p5.12-io-socket-ssl':
+  ensure => '1.997.0',
+}
+package { 'p5.12-ipc-cmd':
+  ensure => '0.920.0',
+}
+package { 'p5.12-json-pp':
+  ensure => '2.272.0',
+}
+package { 'p5.12-libwww-perl':
+  ensure => '6.80.0',
+}
+package { 'p5.12-list-allutils':
+  ensure => '0.80.0',
+}
+package { 'p5.12-list-moreutils':
+  ensure => '0.330.0',
+}
+package { 'p5.12-locale-gettext':
+  ensure => '1.50.0',
+}
+package { 'p5.12-locale-maketext-simple':
+  ensure => '0.210.0',
+}
+package { 'p5.12-lwp-mediatypes':
+  ensure => '6.20.0',
+}
+package { 'p5.12-lwp-protocol-https':
+  ensure => '6.60.0',
+}
+package { 'p5.12-math-round':
+  ensure => '0.60.0',
+}
+package { 'p5.12-mime-base64':
+  ensure => '3.140.0',
+}
+package { 'p5.12-module-build':
+  ensure => '0.420.600',
+}
+package { 'p5.12-module-corelist':
+  ensure => '5.21.2',
+}
+package { 'p5.12-module-implementation':
+  ensure => '0.70.0',
+}
+package { 'p5.12-module-load':
+  ensure => '0.320.0',
+}
+package { 'p5.12-module-load-conditional':
+  ensure => '0.620.0',
+}
+package { 'p5.12-module-metadata':
+  ensure => '1.0.24',
+}
+package { 'p5.12-module-runtime':
+  ensure => '0.14.0',
+}
+package { 'p5.12-mozilla-ca':
+  ensure => '20130114',
+}
+package { 'p5.12-net-http':
+  ensure => '6.70.0',
+}
+package { 'p5.12-net-libidn':
+  ensure => '0.120.0',
+}
+package { 'p5.12-net-ssleay':
+  ensure => '1.650.0',
+}
+package { 'p5.12-package-deprecationmanager':
+  ensure => '0.130.0',
+}
+package { 'p5.12-package-stash':
+  ensure => '0.360.0',
+}
+package { 'p5.12-package-stash-xs':
+  ensure => '0.280.0',
+}
+package { 'p5.12-params-check':
+  ensure => '0.380.0',
+}
+package { 'p5.12-params-util':
+  ensure => '1.70.0',
+}
+package { 'p5.12-params-validate':
+  ensure => '1.130.0',
+}
+package { 'p5.12-parent':
+  ensure => '0.228.0',
+}
+package { 'p5.12-parse-cpan-meta':
+  ensure => '1.441.400',
+}
+package { 'p5.12-pathtools':
+  ensure => '3.470.0',
+}
+package { 'p5.12-perl-ldap':
+  ensure => '0.360.0',
+}
+package { 'p5.12-perl-ostype':
+  ensure => '1.7.0',
+}
+package { 'p5.12-pod-escapes':
+  ensure => '1.60.0',
+}
+package { 'p5.12-pod-simple':
+  ensure => '3.280.0',
+}
+package { 'p5.12-podlators':
+  ensure => '2.5.3',
+}
+package { 'p5.12-scalar-list-utils':
+  ensure => '1.390.0',
+}
+package { 'p5.12-string-crc32':
+  ensure => '1.400.0',
+}
+package { 'p5.12-sub-exporter':
+  ensure => '0.987.0',
+}
+package { 'p5.12-sub-install':
+  ensure => '0.928.0',
+}
+package { 'p5.12-sub-uplevel':
+  ensure => '0.240.0',
+}
+package { 'p5.12-term-readkey':
+  ensure => '2.320.0',
+}
+package { 'p5.12-term-readline-gnu':
+  ensure => '1.240.0',
+}
+package { 'p5.12-term-shell':
+  ensure => '0.10.0',
+}
+package { 'p5.12-test-exception':
+  ensure => '0.320.0',
+}
+package { 'p5.12-test-fatal':
+  ensure => '0.13.0',
+}
+package { 'p5.12-test-leaktrace':
+  ensure => '0.140.0',
+}
+package { 'p5.12-test-requires':
+  ensure => '0.80.0',
+}
+package { 'p5.12-test-simple':
+  ensure => '1.1.3',
+}
+package { 'p5.12-text-iconv':
+  ensure => '1.400.0',
+}
+package { 'p5.12-try-tiny':
+  ensure => '0.220.0',
+}
+package { 'p5.12-uri':
+  ensure => '1.640.0',
+}
+package { 'p5.12-version':
+  ensure => '0.990.800',
+}
+package { 'p5.12-www-robotrules':
+  ensure => '6.20.0',
+}
+package { 'p5.12-xml-filter-buffertext':
+  ensure => '1.10.0',
+}
+package { 'p5.12-xml-parser':
+  ensure => '2.410.0',
+}
+package { 'p5.12-xml-sax-writer':
+  ensure => '0.500.0',
+}
+package { 'p5.12-yaml':
+  ensure => '1.10.0',
+}
+package { 'p5.12-yaml-syck':
+  ensure => '1.270.0',
+}
+package { 'p5.16-algorithm-diff':
+  ensure => '1.190.200',
+}
+package { 'p5.16-attribute-handlers':
+  ensure => '0.960.0',
+}
+package { 'p5.16-authen-sasl':
+  ensure => '2.140.0',
+}
+package { 'p5.16-class-load':
+  ensure => '0.210.0',
+}
+package { 'p5.16-class-singleton':
+  ensure => '1.400.0',
+}
+package { 'p5.16-convert-asn1':
+  ensure => '0.220.0',
+}
+package { 'p5.16-cpan-meta':
+  ensure => '2.142.60',
+}
+package { 'p5.16-cpan-meta-requirements':
+  ensure => '2.126.0',
+}
+package { 'p5.16-cpan-meta-yaml':
+  ensure => '0.12.0',
+}
+package { 'p5.16-data-optlist':
+  ensure => '0.109.0',
+}
+package { 'p5.16-datetime':
+  ensure => '1.100.0',
+}
+package { 'p5.16-datetime-format-strptime':
+  ensure => '1.500.0',
+}
+package { 'p5.16-datetime-locale':
+  ensure => '0.450.0',
+}
+package { 'p5.16-datetime-timezone':
+  ensure => '1.730.0',
+}
+package { 'p5.16-digest-hmac':
+  ensure => '1.30.0',
+}
+package { 'p5.16-digest-md5':
+  ensure => '2.530.0',
+}
+package { 'p5.16-digest-sha1':
+  ensure => '2.130.0',
+}
+package { 'p5.16-dist-checkconflicts':
+  ensure => '0.110.0',
+}
+package { 'p5.16-encode-locale':
+  ensure => '1.30.0',
+}
+package { 'p5.16-error':
+  ensure => '0.170.220',
+}
+package { 'p5.16-extutils-cbuilder':
+  ensure => '0.280.216',
+}
+package { 'p5.16-file-listing':
+  ensure => '6.40.0',
+}
+package { 'p5.16-gssapi':
+  ensure => '0.280.0',
+}
+package { 'p5.16-html-form':
+  ensure => '6.30.0',
+}
+package { 'p5.16-html-parser':
+  ensure => '3.710.0',
+}
+package { 'p5.16-html-tagset':
+  ensure => '3.200.0',
+}
+package { 'p5.16-http-cookies':
+  ensure => '6.10.0',
+}
+package { 'p5.16-http-daemon':
+  ensure => '6.10.0',
+}
+package { 'p5.16-http-date':
+  ensure => '6.20.0',
+}
+package { 'p5.16-http-message':
+  ensure => '6.60.0',
+}
+package { 'p5.16-http-negotiate':
+  ensure => '6.10.0',
+}
+package { 'p5.16-io-socket-ssl':
+  ensure => '1.997.0',
+}
+package { 'p5.16-ipc-cmd':
+  ensure => '0.920.0',
+}
+package { 'p5.16-libwww-perl':
+  ensure => '6.80.0',
+}
+package { 'p5.16-list-allutils':
+  ensure => '0.80.0',
+}
+package { 'p5.16-list-moreutils':
+  ensure => '0.330.0',
+}
+package { 'p5.16-locale-gettext':
+  ensure => '1.50.0',
+}
+package { 'p5.16-locale-maketext-simple':
+  ensure => '0.210.0',
+}
+package { 'p5.16-lwp-mediatypes':
+  ensure => '6.20.0',
+}
+package { 'p5.16-lwp-protocol-https':
+  ensure => '6.60.0',
+}
+package { 'p5.16-math-round':
+  ensure => '0.60.0',
+}
+package { 'p5.16-mime-base64':
+  ensure => '3.140.0',
+}
+package { 'p5.16-module-build':
+  ensure => '0.420.600',
+}
+package { 'p5.16-module-corelist':
+  ensure => '5.21.2',
+}
+package { 'p5.16-module-implementation':
+  ensure => '0.70.0',
+}
+package { 'p5.16-module-load':
+  ensure => '0.320.0',
+}
+package { 'p5.16-module-load-conditional':
+  ensure => '0.620.0',
+}
+package { 'p5.16-module-metadata':
+  ensure => '1.0.24',
+}
+package { 'p5.16-module-runtime':
+  ensure => '0.14.0',
+}
+package { 'p5.16-mozilla-ca':
+  ensure => '20130114',
+}
+package { 'p5.16-net-http':
+  ensure => '6.70.0',
+}
+package { 'p5.16-net-libidn':
+  ensure => '0.120.0',
+}
+package { 'p5.16-net-smtp-ssl':
+  ensure => '1.10.0',
+}
+package { 'p5.16-net-ssleay':
+  ensure => '1.650.0',
+}
+package { 'p5.16-package-deprecationmanager':
+  ensure => '0.130.0',
+}
+package { 'p5.16-package-stash':
+  ensure => '0.360.0',
+}
+package { 'p5.16-package-stash-xs':
+  ensure => '0.280.0',
+}
+package { 'p5.16-params-check':
+  ensure => '0.380.0',
+}
+package { 'p5.16-params-util':
+  ensure => '1.70.0',
+}
+package { 'p5.16-params-validate':
+  ensure => '1.130.0',
+}
+package { 'p5.16-parent':
+  ensure => '0.228.0',
+}
+package { 'p5.16-parse-cpan-meta':
+  ensure => '1.441.400',
+}
+package { 'p5.16-perl-ldap':
+  ensure => '0.360.0',
+}
+package { 'p5.16-perl-ostype':
+  ensure => '1.7.0',
+}
+package { 'p5.16-pod-escapes':
+  ensure => '1.60.0',
+}
+package { 'p5.16-pod-simple':
+  ensure => '3.280.0',
+}
+package { 'p5.16-podlators':
+  ensure => '2.5.3',
+}
+package { 'p5.16-scalar-list-utils':
+  ensure => '1.390.0',
+}
+package { 'p5.16-sub-exporter':
+  ensure => '0.987.0',
+}
+package { 'p5.16-sub-install':
+  ensure => '0.928.0',
+}
+package { 'p5.16-sub-uplevel':
+  ensure => '0.240.0',
+}
+package { 'p5.16-svn-simple':
+  ensure => '0.280.0',
+}
+package { 'p5.16-term-readkey':
+  ensure => '2.320.0',
+}
+package { 'p5.16-term-readline-gnu':
+  ensure => '1.240.0',
+}
+package { 'p5.16-term-shell':
+  ensure => '0.10.0',
+}
+package { 'p5.16-test-exception':
+  ensure => '0.320.0',
+}
+package { 'p5.16-test-fatal':
+  ensure => '0.13.0',
+}
+package { 'p5.16-test-leaktrace':
+  ensure => '0.140.0',
+}
+package { 'p5.16-test-requires':
+  ensure => '0.80.0',
+}
+package { 'p5.16-test-simple':
+  ensure => '1.1.3',
+}
+package { 'p5.16-text-iconv':
+  ensure => '1.400.0',
+}
+package { 'p5.16-try-tiny':
+  ensure => '0.220.0',
+}
+package { 'p5.16-uri':
+  ensure => '1.640.0',
+}
+package { 'p5.16-version':
+  ensure => '0.990.800',
+}
+package { 'p5.16-www-robotrules':
+  ensure => '6.20.0',
+}
+package { 'p5.16-xml-filter-buffertext':
+  ensure => '1.10.0',
+}
+package { 'p5.16-xml-parser':
+  ensure => '2.410.0',
+}
+package { 'p5.16-xml-sax-writer':
+  ensure => '0.500.0',
+}
+package { 'p5.16-yaml':
+  ensure => '1.10.0',
+}
+package { 'p5.16-yaml-syck':
+  ensure => '1.270.0',
+}
+package { 'pango':
+  ensure => '1.36.5',
+}
+package { 'parallel':
+  ensure => '20140722',
+}
+package { 'pcre':
+  ensure => '8.35',
+}
+package { 'perl5':
+  ensure => '5.12.4_0+perl5',
+}
+package { 'perl5.12':
+  ensure => '5.12.5',
+}
+package { 'perl5.16':
+  ensure => '5.16.3',
+}
+package { 'perl5.8':
+  ensure => '5.8.9',
+}
+package { 'pkgconfig':
+  ensure => '0.28',
+}
+package { 'poppler-data':
+  ensure => '0.4.6',
+}
+package { 'popt':
+  ensure => '1.16',
+}
+package { 'ppl':
+  ensure => '1.0',
+}
+package { 'premake':
+  ensure => '3.7',
+}
+package { 'psych':
+  ensure => '2.0.0',
+}
+package { 'pth':
+  ensure => '2.0.7',
+}
+package { 'pulseaudio':
+  ensure => '5.0',
+}
+package { 'puppet':
+  ensure => '2.7.6',
+}
+package { 'py27-cairo':
+  ensure => '1.10.0',
+}
+package { 'py27-crypto':
+  ensure => '2.6.1',
+}
+package { 'py27-ecdsa':
+  ensure => '0.11',
+}
+package { 'py27-gdbm':
+  ensure => '2.7.8',
+}
+package { 'py27-gobject':
+  ensure => '2.28.6',
+}
+package { 'py27-httplib2':
+  ensure => '2-0.8',
+}
+package { 'py27-jinja2':
+  ensure => '2.7.3',
+}
+package { 'py27-markupsafe':
+  ensure => '0.18',
+}
+package { 'py27-nose':
+  ensure => '1.3.1',
+}
+package { 'py27-numpy':
+  ensure => '1.8.2',
+}
+package { 'py27-paramiko':
+  ensure => '1.14.0',
+}
+package { 'py27-pygtk':
+  ensure => '2.24.0',
+}
+package { 'py27-pyrex':
+  ensure => '0.9.9',
+}
+package { 'py27-setuptools':
+  ensure => '5.6',
+}
+package { 'py27-yaml':
+  ensure => '3.11',
+}
+package { 'python25':
+  ensure => '2.5.6',
+}
+package { 'python27':
+  ensure => '2.7.8',
+}
+package { 'python_select':
+  ensure => '0.3',
+}
+package { 'qemu':
+  ensure => '2.1.0_0+curses+ssh+target_alpha+target_arm+target_cris+target_i386+target_lm32+target_m68k+target_microblaze+target_mips+target_or32+target_ppc+target_s390x+target_sh4+target_sparc+target_unicore32+target_x86',
+}
+package { 'qt4-mac':
+  ensure => '4.8.6',
+}
+package { 'rake':
+  ensure => '0.9.6',
+}
+package { 'rarian':
+  ensure => '0.8.1',
+}
+package { 'rb-capistrano':
+  ensure => '2.5.3',
+}
+package { 'rb-echoe':
+  ensure => '3.0.2',
+}
+package { 'rb-haml':
+  ensure => '3.0.25',
+}
+package { 'rb-highline':
+  ensure => '1.5.2',
+}
+package { 'rb-json_pure':
+  ensure => '1.4.6',
+}
+package { 'rb-net-scp':
+  ensure => '1.0.1',
+}
+package { 'rb-net-sftp':
+  ensure => '2.0.2',
+}
+package { 'rb-net-ssh':
+  ensure => '2.0.11',
+}
+package { 'rb-net-ssh-gateway':
+  ensure => '1.0.1',
+}
+package { 'rb-purple':
+  ensure => '0.5.1',
+}
+package { 'rb-rake':
+  ensure => '0.8.7',
+}
+package { 'rb-rubyforge':
+  ensure => '2.0.4',
+}
+package { 'rb-rubygems':
+  ensure => '1.3.7',
+}
+package { 'rb19-bundler':
+  ensure => '1.0.21',
+}
+package { 'rb19-haml':
+  ensure => '4.0.5',
+}
+package { 'rb19-hassle':
+  ensure => '0.0.1',
+}
+package { 'rb19-hpricot':
+  ensure => '0.8.6',
+}
+package { 'rb19-mustache':
+  ensure => '0.12.1',
+}
+package { 'rb19-rdiscount':
+  ensure => '1.6.8',
+}
+package { 'rb19-ronn':
+  ensure => '0.7.3',
+}
+package { 'rb19-rspec':
+  ensure => '1.3.0',
+}
+package { 'rb19-sass':
+  ensure => '3.3.10',
+}
+package { 'rdoc':
+  ensure => '4.0.0',
+}
+package { 'readline':
+  ensure => '6.3.003',
+}
+package { 'readline-5':
+  ensure => '5.2.014',
+}
+package { 'remake':
+  ensure => '3.82-dbg-0.9',
+}
+package { 'rrdtool':
+  ensure => '1.4.7',
+}
+package { 'rsync':
+  ensure => '3.1.1',
+}
+package { 'rtmpdump':
+  ensure => '2.4',
+}
+package { 'ruby':
+  ensure => '1.8.7-p374',
+}
+package { 'ruby19':
+  ensure => '1.9.3-p547',
+}
+package { 'ruby20':
+  ensure => '2.0.0-p481',
+}
+package { 'ruby_select':
+  ensure => '1.0',
+}
+package { 'rvm':
+  ensure => '1.07',
+}
+package { 'samba3':
+  ensure => '3.6.23',
+}
+package { 'schroedinger':
+  ensure => '1.0.11',
+}
+package { 'scm_breeze':
+  ensure => '1.0.0',
+}
+package { 'scons':
+  ensure => '2.3.0',
+}
+package { 'serf1':
+  ensure => '1.3.4',
+}
+package { 'shared-mime-info':
+  ensure => '1.3',
+}
+package { 'shelldap':
+  ensure => '0.5',
+}
+package { 'speex':
+  ensure => '1.2rc1',
+}
+package { 'spymemcached':
+  ensure => '2.8.4',
+}
+package { 'sqlite2':
+  ensure => '2.8.17',
+}
+package { 'sqlite3':
+  ensure => '1.3.7',
+}
+package { 'subversion':
+  ensure => '1.8.10',
+}
+package { 'subversion-perlbindings-5.16':
+  ensure => '1.8.10',
+}
+package { 'sudo':
+  ensure => '1.8.8',
+}
+package { 'tcl':
+  ensure => '8.6.1',
+}
+package { 'tcp_wrappers':
+  ensure => '20',
+}
+package { 'test-unit':
+  ensure => '2.0.0.0',
+}
+package { 'texi2html':
+  ensure => '5.0',
+}
+package { 'texinfo':
+  ensure => '5.2',
+}
+package { 'tiff':
+  ensure => '4.0.3',
+}
+package { 'tk':
+  ensure => '8.6.1',
+}
+package { 'tokyocabinet':
+  ensure => '1.4.48',
+}
+package { 'tree':
+  ensure => '1.7.0',
+}
+package { 'unixODBC':
+  ensure => '2.3.1',
+}
+package { 'urw-fonts':
+  ensure => '1.0.7pre44',
+}
+package { 'vala':
+  ensure => '0.24.0',
+}
+package { 'vde2':
+  ensure => '2.3.1',
+}
+package { 'w3m':
+  ensure => '0.5.3',
+}
+package { 'wavpack':
+  ensure => '4.70.0',
+}
+package { 'wdiff':
+  ensure => '1.2.2',
+}
+package { 'webp':
+  ensure => '0.4.0',
+}
+package { 'wget':
+  ensure => '1.15',
+}
+package { 'x264':
+  ensure => '20140124',
+}
+package { 'xhtml1':
+  ensure => '2.0',
+}
+package { 'xmlcatmgr':
+  ensure => '2.2',
+}
+package { 'xmlto':
+  ensure => '0.0.25',
+}
+package { 'xmms':
+  ensure => '1.2.11',
+}
+package { 'xorg-bigreqsproto':
+  ensure => '1.1.2',
+}
+package { 'xorg-cf-files':
+  ensure => '1.0.4',
+}
+package { 'xorg-compositeproto':
+  ensure => '0.4.2',
+}
+package { 'xorg-damageproto':
+  ensure => '1.2.1',
+}
+package { 'xorg-evieproto':
+  ensure => '1.1.1',
+}
+package { 'xorg-fixesproto':
+  ensure => '5.0',
+}
+package { 'xorg-inputproto':
+  ensure => '2.3.1',
+}
+package { 'xorg-kbproto':
+  ensure => '1.0.6',
+}
+package { 'xorg-libX11':
+  ensure => '1.6.2',
+}
+package { 'xorg-libXau':
+  ensure => '1.0.8',
+}
+package { 'xorg-libXcomposite':
+  ensure => '0.4.4',
+}
+package { 'xorg-libXcursor':
+  ensure => '1.1.14',
+}
+package { 'xorg-libXdamage':
+  ensure => '1.1.4',
+}
+package { 'xorg-libXdmcp':
+  ensure => '1.1.1',
+}
+package { 'xorg-libXevie':
+  ensure => '1.0.3',
+}
+package { 'xorg-libXext':
+  ensure => '1.3.3',
+}
+package { 'xorg-libXfixes':
+  ensure => '5.0.1',
+}
+package { 'xorg-libXi':
+  ensure => '1.7.4',
+}
+package { 'xorg-libXinerama':
+  ensure => '1.1.3',
+}
+package { 'xorg-libXrandr':
+  ensure => '1.4.2',
+}
+package { 'xorg-libXt':
+  ensure => '1.1.4',
+}
+package { 'xorg-libXtst':
+  ensure => '1.2.2',
+}
+package { 'xorg-libice':
+  ensure => '1.0.8',
+}
+package { 'xorg-libpthread-stubs':
+  ensure => '0.3',
+}
+package { 'xorg-libsm':
+  ensure => '1.2.1',
+}
+package { 'xorg-libxcb':
+  ensure => '1.11',
+}
+package { 'xorg-printproto':
+  ensure => '1.0.5',
+}
+package { 'xorg-randrproto':
+  ensure => '1.4.0',
+}
+package { 'xorg-recordproto':
+  ensure => '1.14.2',
+}
+package { 'xorg-renderproto':
+  ensure => '0.11.1',
+}
+package { 'xorg-util-macros':
+  ensure => '1.19.0',
+}
+package { 'xorg-xcb-proto':
+  ensure => '1.11',
+}
+package { 'xorg-xcb-util':
+  ensure => '0.3.9',
+}
+package { 'xorg-xcmiscproto':
+  ensure => '1.2.2',
+}
+package { 'xorg-xextproto':
+  ensure => '7.3.0',
+}
+package { 'xorg-xf86bigfontproto':
+  ensure => '1.2.0',
+}
+package { 'xorg-xineramaproto':
+  ensure => '1.2.1',
+}
+package { 'xorg-xproto':
+  ensure => '7.0.26',
+}
+package { 'xorg-xtrans':
+  ensure => '1.3.4',
+}
+package { 'xrender':
+  ensure => '0.9.8',
+}
+package { 'xz':
+  ensure => '5.0.5',
+}
+package { 'yajl':
+  ensure => '2.0.4',
+}
+package { 'yasm':
+  ensure => '1.2.0',
+}
+package { 'zlib':
+  ensure => '1.2.8',
+}
