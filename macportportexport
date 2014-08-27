@@ -309,13 +309,13 @@ class defaults {
 sub write_macports_manifest 
 {
 
-	my $root 			= $_[0];
-	my $modules_dir 	= $root.'/modules';
+	my $root 						= $_[0];
+	my $modules_dir 				= $root.'/modules';
 	my $macports_module 			= $modules_dir.'/macports';
 	my $macports_module_manifestdir = $macports_module.'/manifests';
 	my $macports_manifest 			= $macports_module_manifestdir.'/init.pp';
 	my $macports_module_filesdir	= $macports_module.'/files';
-	my $writebuffer 	= '';
+	my $writebuffer 				= '';
 
 
 	( ! -d $macports_module 			) and mkdir $macports_module; 
@@ -446,6 +446,23 @@ sub nix
 
 }
 
+sub cli
+{
+
+	my %portshash 		 = get_portpackagesandvariants( );
+	my @listofpackages 	 = keys %portshash;
+
+	@listofpackages 	= sort @listofpackages;
+
+	my $writebuffer 	= '';
+	foreach my $package ( @listofpackages ) {
+		$writebuffer .= $package.' '.$portshash{ $package }. ' ';
+	}
+
+	printf "%s\n", $writebuffer;
+
+}
+
 
 sub dispatch
 {
@@ -456,7 +473,7 @@ sub dispatch
 			chef   		=> \&chef_recipe,
 			ansible 	=> \&ansible_module,
 			cfengine 	=> \&cfegine,
-			cli 		=> \&get_portpackagesandvariants,
+			cli 		=> \&cli,
 			_DEFAULT_ 	=> \&help
 	};
 
@@ -465,22 +482,19 @@ sub dispatch
 
 	if( $action ) {
 		$dispatch_table->{ $action }->();
-	}
-
-	exit 0;
+	} 
 }
 
 sub help {
 
 	print "this is the help\n";
 
-	exit 0;
 }
 
 sub main
 {
 
-	GetOptions( 'export:s' => \&dispatch, 'filename:s' => \&filename, 'help' => \&help );
+	GetOptions( 'export-to:s' => \&dispatch, 'filename:s' => \&filename, 'help' => \&help );
 
 	exit 0;
 
