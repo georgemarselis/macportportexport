@@ -422,15 +422,30 @@ sub chef_recipe
 
 }
 
+
 sub ansible_module 
 {
 
 }
 
+
 sub cfengine 
 {
 
 }
+
+
+sub homebrew
+{
+
+}
+
+
+sub nix
+{
+
+}
+
 
 sub dispatch
 {
