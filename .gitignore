@@ -1,1 +1,3 @@
 puppet
+out
+*.pp
