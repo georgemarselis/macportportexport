@@ -211,7 +211,7 @@ sub create_module_hierarchy
 
 	foreach my $module ( @listofpackages ) {
 	
-		#$module =~ s/\./-/g;
+		$module =~ s/\./-/g;
 		$module = lc $module;
 		my $puppetmodule_dir 		= $modules_dir.'/'.$module;
 		my $puppetmanifest_dir 		= $puppetmodule_dir.'/manifests';
@@ -236,7 +236,10 @@ sub write_module_manistests
 
 	foreach my $package ( @listofpackages ) {
 		
-		#$package =~ s/\./-/g;
+		my $package_name = $package;
+		$package =~ s/\./-/g;
+		$package = lc $package;
+		
 		my $puppet_module_dir 			= $modules_dir.'/'.$package;
 		my $puppet_module_manifest_dir 	= $puppet_module_dir.'/manifests';
 		my $puppet_module_manifest_file = $puppet_module_manifest_dir.'/init.pp';
@@ -244,14 +247,13 @@ sub write_module_manistests
 		( ! -d $puppet_module_manifest_dir ) and die ": $puppet_module_manifest_dir does not exist";
 		open my $filehandle, '>', $puppet_module_manifest_file or die ": could not open $puppet_module_manifest_file : $!";
 
-		#$package =~ s/\./-/g;
-		$package = lc $package;
 		my $writebuffer  = "
 class $package {
 
-	package { [ '$package' ] :
+	package { '$package':
+		name 		=> '$package_name',
 		provider 	=> 'macports',
-		ensure 		=> present,
+		ensure 		=> present,				# this will be version in the future
 	}
 }
 ";
@@ -290,7 +292,7 @@ class defaults {
 	@listofpackages = sort @unsortedarray;
 	
 	foreach my $package ( @listofpackages )	{
-		#$package =~ s/\./-/g;
+		$package =~ s/\./-/g;
 		$package = lc $package;
 		$writebuffer .= sprintf( "\tinclude '$package'\n" );
 	}
