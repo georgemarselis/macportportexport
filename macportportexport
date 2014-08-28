@@ -28,7 +28,9 @@ use POSIX qw(strftime);
 use Getopt::Long;
 use Sys::Hostname;
 
-my $port_bin = '/opt/local/bin/port';
+my $macports_bin = '/opt/local/bin/port';	 # should come up with a way to decide
+my $homebrew_bin = '/usr/local/bin/brew'; 	 # which to use by default;
+my $nix_bin 	 = '/opt/local/bin/nix-env';
 
 # Set PATH and remove some environment variables for running in taint mode.
 $ENV{ 'PATH' } = '';
@@ -41,8 +43,8 @@ sub get_portpackagesandvariants
 	my $type    = 'active';
 	my @args 	= ( $action, $type );
 
-	open( my $porthandle, '-|', $port_bin, @args ) or
-		die "Cannot run $port_bin: $!";
+	open( my $porthandle, '-|', $macports_bin, @args ) or
+		die "Cannot run $macports_bin: $!";
 
 	return parse( <$porthandle> );
 
@@ -459,7 +461,8 @@ sub cli
 		$writebuffer .= $package.' '.$portshash{ $package }. ' ';
 	}
 
-	printf "%s\n", $writebuffer;
+	my $installer_bin = $macports_bin ? $macports_bin : '';
+	printf "$installer_bin install %s\n", $writebuffer;
 
 }
 
@@ -482,7 +485,7 @@ sub dispatch
 
 	if( $action ) {
 		$dispatch_table->{ $action }->();
-	} 
+	}
 }
 
 sub help {
