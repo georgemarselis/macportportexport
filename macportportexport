@@ -197,7 +197,7 @@ sub write_module_manistests
 	my @listofpackages 				= keys %portshash;
 
 	foreach my $package ( @listofpackages ) {
-		
+
 		my $package_name = $package;
 		$package =~ s/\./-/g;
 		$package = lc $package;
@@ -209,13 +209,16 @@ sub write_module_manistests
 		( ! -d $puppet_module_manifest_dir ) and die ": $puppet_module_manifest_dir does not exist";
 		open my $filehandle, '>', $puppet_module_manifest_file or die ": could not open $puppet_module_manifest_file : $!";
 
-		my $writebuffer  = "
+		my $ensure_string 	= $portshash{ $package_name };
+		$ensure_string 		=~ s/_\d+([\+\n])/$1/g;
+		$ensure_string 		=~ s/@//;
+		my $writebuffer  	= "
 class $package {
 
 	package { '$package':
 		name 		=> '$package_name',
 		provider 	=> 'macports',
- 		ensure 		=> '$portshash{ $package_name }',
+		ensure 		=> '$ensure_string',
 	}
 }
 ";
@@ -254,6 +257,7 @@ class defaults {
 	@listofpackages = sort @unsortedarray;
 	
 	foreach my $package ( @listofpackages )	{
+
 		$package =~ s/\./-/g;
 		$package = lc $package;
 		$writebuffer .= sprintf( "\tinclude '$package'\n" );
