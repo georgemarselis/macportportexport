@@ -46,17 +46,18 @@ sub get_portpackagesandvariants
 	open( my $porthandle, '-|', $macports_bin, @args ) or
 		die "Cannot run $macports_bin: $!";
 
-	return parse( <$porthandle> );
+	return parse_macports( <$porthandle> );
 
 }
 
 
-sub parse
+sub parse_macports
 {
 
-	my @list 		= @_;
-	my %portshash 	= ( );
-	my $variants 	= '';
+	my @list 		 = @_;
+	my %portshash 	 = ( );
+	my $variants 	 = '';
+	my $program_name = '';
 	
 	foreach( @list ) {
 
@@ -66,17 +67,9 @@ sub parse
 		chomp $tempbuffer;
 		$tempbuffer =~ s/^\s*//;
 		$tempbuffer =~ s/ \(active\)//;
-		$tempbuffer =~ s/@//g;
 
-		my ( $program_name , $variants_in ) = split ' ', $tempbuffer;
+		( $program_name , $variants ) = split ' ', $tempbuffer;
 		
-		if( $variants_in =~ /\+\w+/ ) {
-
-			( my $foo , $variants_in )	= split /\+/, $variants_in, 2;  # get the variants as string
-			my @temparray				= split /\+/, $variants_in;     # resplit them 
-			$variants 					= '+'.join( ' +', @temparray ); # re-join them, adding appropriate spaces		
-		}
-
 		$portshash{ $program_name } = $variants;
 	}
 
@@ -94,53 +87,19 @@ sub puppet_template
 
 	my %portshash 		 = get_portpackagesandvariants( );
 	my @listofpackages 	 = keys %portshash;
-	my $stringofvariants = get_puppet_stringofvariants( %portshash );
 
 	create_root_directory(    $root_dir  );
 	write_root_manifest( 	  $root_dir  );
 	create_module_hierarchy(  $root_dir, @listofpackages );
-	write_module_manistests(  $root_dir, @listofpackages );
+	write_module_manistests(  $root_dir, %portshash );
 	write_defaults_manifests( $root_dir, @listofpackages );
 	write_macports_manifest(  $root_dir  );
-	write_variants_conffile(  $root_dir, $stringofvariants );
 	
 	print "\nYour puppet files are ready. Please type\n\tsudo puppet apply --verbose ./$root_dir/manifests/site.pp --modulepath=puppet/modules\n\n".
 			" to apply your puppet manifestos.\n";
 
 }
 
-
-sub get_puppet_stringofvariants 
-{
-	my %portshash 		= @_;
-	my @packages 		= keys %portshash;
-	my %variantshash  	= ( );
-	my $stringofvariants = '';
-	
-	foreach my $package ( @packages ) {
-
-		if( $portshash{ $package } =~ /\+/ ) {
-
-			my @variants = split /\+/, $portshash{ $package };
-
-			foreach my $variant ( @variants ) {
-				chomp $variant;
-				$variant =~ s/\s*$//;
-				if( $variant ne '' and ! exists $variantshash{ $variant } ) {
-					$variantshash{ $variant } = 1;
-				}
-			}
-		}
-	}
-
-	foreach( keys %variantshash ) {
-		if( $variantshash{ $_ } ne '' ) {
-			$stringofvariants .= ' +'.$_ ;
-		}
-	}
-
-	return $stringofvariants;
-}
 
 sub create_root_directory
 {
@@ -233,8 +192,9 @@ sub create_module_hierarchy
 
 sub write_module_manistests
 {
-	my ( $root_dir, @listofpackages ) 	= @_;
-	my $modules_dir 					= $root_dir.'/modules';
+	my ( $root_dir, %portshash ) 	= @_;
+	my $modules_dir 			 	= $root_dir.'/modules';
+	my @listofpackages 				= keys %portshash;
 
 	foreach my $package ( @listofpackages ) {
 		
@@ -255,7 +215,7 @@ class $package {
 	package { '$package':
 		name 		=> '$package_name',
 		provider 	=> 'macports',
-		ensure 		=> present,				# this will be version in the future
+ 		ensure 		=> '$portshash{ $package_name }',
 	}
 }
 ";
@@ -383,42 +343,6 @@ class macports {
 }
 
 
-sub write_variants_conffile 
-{
-
-	my ( $root_dir, $stringofvariants )	= @_;
-	my $macportsvariantsconf_file 		= '/opt/local/etc/macports/variants.conf';
-	my $macports_module_files_dir	 	= $root_dir.'/modules/macports/files';
-	my $macports_module_variants_file   = $macports_module_files_dir.'/variants.conf';
-	my $writebuffer 					= '';
-
-
-	if( -e $macportsvariantsconf_file ) {
-
-		# write warning to user that file exists and should not overwrite it,
-		# but append to it.
-		$writebuffer = "#
-# PLEASE READ: 
-#   Your / opt/local/etc/macports/variants.conf is not empty.
-#
-# 	You should take a look at the contents of the file and consider if you need to 
-#	append to the file or overwrite it.
-#
-";
-	}
-
-	$stringofvariants =~ s/^\s*//;
-
-	$writebuffer .= sprintf( "%s\n", $stringofvariants );
-
-	( ! -d $macports_module_files_dir ) and die "$macports_module_files_dir does not exist";
-	open( my $filehandle, ">", $macports_module_variants_file ) or 
-		die $macports_module_variants_file.' could not be written; exiting';
-	printf $filehandle $writebuffer;
-	close $filehandle;
-}
-
-
 sub chef_recipe
 {
 
@@ -497,7 +421,7 @@ sub help {
 sub main
 {
 
-	GetOptions( 'export-to:s' => \&dispatch, 'filename:s' => \&filename, 'help' => \&help );
+	GetOptions( 'export-as:s' => \&dispatch, 'filename:s' => \&filename, 'help' => \&help );
 
 	exit 0;
 
