@@ -213,7 +213,7 @@ sub write_module_manistests
 		$ensure_string 		=~ s/_\d+([\+\n])/$1/g;
 		$ensure_string 		=~ s/@//;
 		my $writebuffer  	= "
-class $package {
+class package::$package {
 
 	package { '$package':
 		name 		=> '$package_name',
@@ -260,7 +260,7 @@ class defaults {
 
 		$package =~ s/\./-/g;
 		$package = lc $package;
-		$writebuffer .= sprintf( "\tinclude '$package'\n" );
+		$writebuffer .= sprintf( "\tinclude 'package::$package'\n" );
 	}
 	$writebuffer .= sprintf( "}\n" );
 
@@ -291,7 +291,7 @@ sub write_macports_manifest
 
 
 	$writebuffer  = "
-class macports {
+class package::macports {
 
 
 	\$osnickname = \$macosx_productversion_major ? {
@@ -353,7 +353,12 @@ sub chef_recipe
 }
 
 
-sub ansible_module 
+sub ansible_playbook
+{
+
+}
+
+sub salt
 {
 
 }
@@ -432,3 +437,4 @@ sub main
 }
 
 main( );
+
