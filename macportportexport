@@ -213,7 +213,7 @@ sub write_module_manistests
 		$ensure_string 		=~ s/_\d+([\+\n])/$1/g;
 		$ensure_string 		=~ s/@//;
 		my $writebuffer  	= "
-class package::$package {
+class $package {
 
 	package { '$package':
 		name 		=> '$package_name',
@@ -260,7 +260,7 @@ class defaults {
 
 		$package =~ s/\./-/g;
 		$package = lc $package;
-		$writebuffer .= sprintf( "\tinclude 'package::$package'\n" );
+		$writebuffer .= sprintf( "\tclass { '$package': }\n" );
 	}
 	$writebuffer .= sprintf( "}\n" );
 
