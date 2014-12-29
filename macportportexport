@@ -260,7 +260,8 @@ class defaults {
 
 		$package =~ s/\./-/g;
 		$package = lc $package;
-		$writebuffer .= sprintf( "\tinclude $package\n" );
+
+		$writebuffer .= sprintf( "\tclass { '$package': }\n" );
 	}
 	$writebuffer .= sprintf( "}\n" );
 
