@@ -12,3 +12,6 @@ Stage 3: prêt-à-porter managed environment with Chef!
 Stage 4: prêt-à-porter managed environment with Ansible!
 
 Stage 5: prêt-à-porter managed environment with Cfengine!
+
+Stage 6: prêt-à-porter managed environment with Salt!
+
